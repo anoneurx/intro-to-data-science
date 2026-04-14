@@ -34,7 +34,7 @@ A comprehensive repository for **Introduction to Data Science** featuring:
 
 |  Agent |  Documentation |  Description |
 |----------|------------------|----------------|
-| [CSV Upload Agent](Agents/csv-upload-agent/student_walkthrough.md) | [View](Agents/csv-upload-agent/student_walkthrough.md) | Professional Data Science Agent with automated fetch and deep audit capabilities |
+| [CSV Upload Agent](Agents/csv-upload-agent/csv-upload-agent.md) | [Full System Guide](Agents/csv-upload-agent/AGENT_SYSTEM_GUIDE.md) \| [Beginner Walkthrough](Agents/csv-upload-agent/student_walkthrough.md) | Professional Data Science Agent with automated fetch and deep audit capabilities |
 
 > **More agents coming soon!** Contribute your own via pull requests.
 

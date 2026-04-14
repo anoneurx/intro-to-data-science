@@ -1,15 +1,15 @@
-#  Welcome to Your First Data Science Agent!
+# Welcome to Your First Data Science Agent!
 
 Hello! This guide is designed for **beginners** who want to learn how to automate data tasks using Python. We will build a "Data Agent" that lives in Google Colab and helps you handle files automatically.
 
 ---
 
-##  What is a Data Agent?
-Think of an agent as a small robot  that waits for your commands. Instead of clicking many buttons manually, you just type a word like **'analyze'**, and the agent does the hard work for you!
+## What is a Data Agent?
+Think of an agent as a small robot that waits for your commands. Instead of clicking many buttons manually, you just type a word like **'analyze'**, and the agent does the hard work for you!
 
 ---
 
-##  How the Agent "Thinks" (The Plan)
+## How the Agent "Thinks" (The Plan)
 
 Here is a simple map of how our agent processes your requests:
 
