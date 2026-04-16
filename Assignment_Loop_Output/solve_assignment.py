@@ -4,7 +4,7 @@ import csv
 
 def main():
     # Base directory for the output
-    base_dir = "Assignment_Loop_Output"
+    base_dir = os.path.dirname(os.path.abspath(__file__))
     os.makedirs(base_dir, exist_ok=True)
     
     # Secure values 1 to 100
@@ -14,9 +14,10 @@ def main():
     parts = [values[i:i + 10] for i in range(0, 100, 10)]
     
     # 2 different files already saved in other subfolders
+    parent_dir = os.path.dirname(base_dir)
     source_files = [
-        "Study_Materials/Python_AdvancedLoops_Patterns.ipynb",
-        "Study_Materials/Python_Basics_DataTypes_Variables.ipynb"
+        os.path.join(parent_dir, "Study_Materials/Python_AdvancedLoops_Patterns.ipynb"),
+        os.path.join(parent_dir, "Study_Materials/Python_Basics_DataTypes_Variables.ipynb")
     ]
     
     for idx, part in enumerate(parts):
@@ -24,20 +25,19 @@ def main():
         os.makedirs(folder_name, exist_ok=True)
         
         # Every subfolder has at least 3 sub files
-        # We can divide the 10 numbers into 3 files
         sub_files_content = {
-            "file_chunk_1.csv": part[:3],    # First 3 values
-            "file_chunk_2.csv": part[3:6],   # Next 3 values
-            "file_chunk_3.csv": part[6:]     # Remaining 4 values
+            "file_chunk_1.csv": part,
+            "file_chunk_2.csv": part,
+            "file_chunk_3.csv": part
         }
         
         for file_name, content in sub_files_content.items():
             file_path = os.path.join(folder_name, file_name)
             with open(file_path, "w", newline="") as f:
                 writer = csv.writer(f)
-                writer.writerow(["x_value"])
+                writer.writerow(["X", "X_squared"])
                 for val in content:
-                    writer.writerow([val])
+                    writer.writerow([val, val**2])
                 
         # Copy the 2 files, handling "no duplicate copy"
         for src_file in source_files:
