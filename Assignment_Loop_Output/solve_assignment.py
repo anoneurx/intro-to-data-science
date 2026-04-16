@@ -26,9 +26,9 @@ def main():
         
         # Every subfolder has at least 3 sub files
         sub_files_content = {
-            "file_chunk_1.csv": part,
-            "file_chunk_2.csv": part,
-            "file_chunk_3.csv": part
+            "file_chunk_1.csv": parts[idx % 10],
+            "file_chunk_2.csv": parts[(idx + 1) % 10],
+            "file_chunk_3.csv": parts[(idx + 2) % 10]
         }
         
         for file_name, content in sub_files_content.items():
