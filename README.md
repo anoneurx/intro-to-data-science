@@ -88,8 +88,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file (cr
 ---
 
 ##  Authors
-- **Your Name** - Initial setup & agents
-- **BLACKBOXAI** - File organization & README
+- **Anoneurx** 
 
 Happy learning & automating! 
 
