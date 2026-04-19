@@ -14,6 +14,16 @@ A comprehensive repository for **Introduction to Data Science** featuring:
 - **AI-powered data science agents** built in Google Colab for automating data tasks (upload, preview, analysis, visualization).
 - **Python fundamentals study materials** as organized Jupyter notebooks.
 
+## 📂 Branch Structure
+
+This repository is organized into specialized branches for better management:
+
+- **[Assignments](https://github.com/anoneurx/intro-to-data-science/tree/assignments)**: Contains all assignment-related files and task solutions.
+- **[AI Agents](https://github.com/anoneurx/intro-to-data-science/tree/agents)**: Dedicated to AI-powered data science agents and automation scripts.
+- **[Study Materials](https://github.com/anoneurx/intro-to-data-science/tree/study-materials)**: Includes Python fundamentals, Jupyter notebooks, and learning resources.
+
+---
+
 >  Perfect for students learning **Python basics + data science automation + agent-based systems**.
 
 ---
