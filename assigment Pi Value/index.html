@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a8a; /* Deep Navy Blue */
-            --primary-light: #3b82f6; /* Brighter Blue */
+            --primary: #1e3a8a;
+            /* Deep Navy Blue */
+            --primary-light: #3b82f6;
+            /* Brighter Blue */
             --bg-light: #f8fafc;
             --text-dark: #0f172a;
             --accent: #0ea5e9;
@@ -59,7 +62,9 @@
         }
 
         @media (max-width: 850px) {
-            .main-content { grid-template-columns: 1fr; }
+            .main-content {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Simulation Canvas Section */
@@ -102,7 +107,10 @@
             color: white;
         }
 
-        .btn-start:hover { background-color: #1e40af; transform: translateY(-1px); }
+        .btn-start:hover {
+            background-color: #1e40af;
+            transform: translateY(-1px);
+        }
 
         .btn-reset {
             background-color: #f1f5f9;
@@ -110,7 +118,9 @@
             border: 1px solid #cbd5e1;
         }
 
-        .btn-reset:hover { background-color: #e2e8f0; }
+        .btn-reset:hover {
+            background-color: #e2e8f0;
+        }
 
         /* Data Section */
         .data-panel {
@@ -156,147 +166,153 @@
             text-align: center;
         }
 
-        .highlight { color: #38bdf8; font-weight: bold; }
-
+        .highlight {
+            color: #38bdf8;
+            font-weight: bold;
+        }
     </style>
 </head>
+
 <body>
 
-<div class="container">
-    <header>
-        <h1>Monte Carlo Pi Simulation</h1>
-        <p class="subtitle">Intro to Data Science: Statistical Probability Assignment</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>Monte Carlo Pi Simulation</h1>
+            <p class="subtitle">Intro to Data Science: Statistical Probability Assignment</p>
+        </header>
 
-    <div class="main-content">
-        <!-- Visual Section -->
-        <div class="simulation-box">
-            <canvas id="piCanvas" width="400" height="400"></canvas>
-            <div class="controls">
-                <button id="toggleBtn" class="btn btn-start">Start Simulation</button>
-                <button id="resetBtn" class="btn btn-reset">Reset</button>
-            </div>
-        </div>
-
-        <!-- Logic & Stats Section -->
-        <div class="data-panel">
-            <div class="card">
-                <div class="stat-group">
-                    <span class="stat-label">Total Samples (N)</span>
-                    <span id="totalLbl" class="stat-value">0</span>
-                </div>
-                <div class="stat-group">
-                    <span class="stat-label">Points Inside Circle (M)</span>
-                    <span id="insideLbl" class="stat-value">0</span>
+        <div class="main-content">
+            <!-- Visual Section -->
+            <div class="simulation-box">
+                <canvas id="piCanvas" width="400" height="400"></canvas>
+                <div class="controls">
+                    <button id="toggleBtn" class="btn btn-start">Start Simulation</button>
+                    <button id="resetBtn" class="btn btn-reset">Reset</button>
                 </div>
             </div>
 
-            <div class="pi-formula">
-                &pi; &approx; 4 &times; (<span class="highlight">M</span> / <span class="highlight">N</span>)<br>
-                Estimated &pi; = <span id="piEstimate" class="highlight" style="font-size: 1.4rem;">0.00000</span>
-            </div>
+            <!-- Logic & Stats Section -->
+            <div class="data-panel">
+                <div class="card">
+                    <div class="stat-group">
+                        <span class="stat-label">Total Samples (N)</span>
+                        <span id="totalLbl" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-group">
+                        <span class="stat-label">Points Inside Circle (M)</span>
+                        <span id="insideLbl" class="stat-value">0</span>
+                    </div>
+                </div>
 
-            <p style="margin-top: 25px; color: #475569; line-height: 1.5;">
-                <strong>Simulation Logic:</strong><br>
-                We generate random points inside a square. By counting how many points fall inside the inscribed circle, we can use probability to approximate the value of Pi. The more points we add, the more accurate our result becomes.
-            </p>
+                <div class="pi-formula">
+                    &pi; &approx; 4 &times; (<span class="highlight">M</span> / <span class="highlight">N</span>)<br>
+                    Estimated &pi; = <span id="piEstimate" class="highlight" style="font-size: 1.4rem;">0.00000</span>
+                </div>
+
+                <p style="margin-top: 25px; color: #475569; line-height: 1.5;">
+                    <strong>Simulation Logic:</strong><br>
+                    We generate random points inside a square. By counting how many points fall inside the inscribed
+                    circle, we can use probability to approximate the value of Pi. The more points we add, the more
+                    accurate our result becomes.
+                </p>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    const canvas = document.getElementById('piCanvas');
-    const ctx = canvas.getContext('2d');
-    const toggleBtn = document.getElementById('toggleBtn');
-    const resetBtn = document.getElementById('resetBtn');
+    <script>
+        const canvas = document.getElementById('piCanvas');
+        const ctx = canvas.getContext('2d');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const resetBtn = document.getElementById('resetBtn');
 
-    // Stats
-    let total = 0;
-    let inside = 0;
-    let running = false;
-    let loopId;
+        // Stats
+        let total = 0;
+        let inside = 0;
+        let running = false;
+        let loopId;
 
-    const size = 400;
-    const center = size / 2;
-    const radius = size / 2;
+        const size = 400;
+        const center = size / 2;
+        const radius = size / 2;
 
-    // Initialize the visualization background
-    function drawCircle() {
-        ctx.clearRect(0, 0, size, size);
-        ctx.strokeStyle = '#1e3a8a'; // Dark Blue Border
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(center, center, radius, 0, Math.PI * 2);
-        ctx.stroke();
-    }
+        // Initialize the visualization background
+        function drawCircle() {
+            ctx.clearRect(0, 0, size, size);
+            ctx.strokeStyle = '#1e3a8a'; // Dark Blue Border
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(center, center, radius, 0, Math.PI * 2);
+            ctx.stroke();
+        }
 
-    function addPoints() {
-        // Add 50 points per frame for a smooth but fast animation
-        for (let i = 0; i < 50; i++) {
-            const x = Math.random() * size;
-            const y = Math.random() * size;
+        function addPoints() {
+            // Add 50 points per frame for a smooth but fast animation
+            for (let i = 0; i < 50; i++) {
+                const x = Math.random() * size;
+                const y = Math.random() * size;
 
-            // Check if point is inside circle using Distance Formula
-            // (x - h)^2 + (y - k)^2 <= r^2
-            const dx = x - center;
-            const dy = y - center;
-            const isInside = (dx*dx + dy*dy) <= (radius*radius);
+                // Check if point is inside circle using Distance Formula
+                // (x - h)^2 + (y - k)^2 <= r^2
+                const dx = x - center;
+                const dy = y - center;
+                const isInside = (dx * dx + dy * dy) <= (radius * radius);
 
-            if (isInside) {
-                inside++;
-                ctx.fillStyle = '#1e3a8a'; // Dark Blue for Inside
-            } else {
-                ctx.fillStyle = '#cbd5e1'; // Light Gray for Outside
+                if (isInside) {
+                    inside++;
+                    ctx.fillStyle = '#1e3a8a'; // Dark Blue for Inside
+                } else {
+                    ctx.fillStyle = '#cbd5e1'; // Light Gray for Outside
+                }
+
+                ctx.fillRect(x, y, 1.5, 1.5);
+                total++;
             }
 
-            ctx.fillRect(x, y, 1.5, 1.5);
-            total++;
+            // Update UI Text
+            document.getElementById('totalLbl').innerText = total.toLocaleString();
+            document.getElementById('insideLbl').innerText = inside.toLocaleString();
+
+            const pi = (4 * inside / total).toFixed(5);
+            document.getElementById('piEstimate').innerText = pi;
+
+            if (running) {
+                loopId = requestAnimationFrame(addPoints);
+            }
         }
 
-        // Update UI Text
-        document.getElementById('totalLbl').innerText = total.toLocaleString();
-        document.getElementById('insideLbl').innerText = inside.toLocaleString();
-        
-        const pi = (4 * inside / total).toFixed(5);
-        document.getElementById('piEstimate').innerText = pi;
-        
-        if (running) {
-            loopId = requestAnimationFrame(addPoints);
-        }
-    }
+        // Button Interaction
+        toggleBtn.addEventListener('click', () => {
+            if (!running) {
+                running = true;
+                toggleBtn.innerText = "Pause Simulation";
+                toggleBtn.style.backgroundColor = "#e11d48"; // Change to Red when running
+                addPoints();
+            } else {
+                running = false;
+                toggleBtn.innerText = "Resume Simulation";
+                toggleBtn.style.backgroundColor = "#1e3a8a"; // Back to Blue
+                cancelAnimationFrame(loopId);
+            }
+        });
 
-    // Button Interaction
-    toggleBtn.addEventListener('click', () => {
-        if (!running) {
-            running = true;
-            toggleBtn.innerText = "Pause Simulation";
-            toggleBtn.style.backgroundColor = "#e11d48"; // Change to Red when running
-            addPoints();
-        } else {
+        resetBtn.addEventListener('click', () => {
             running = false;
-            toggleBtn.innerText = "Resume Simulation";
-            toggleBtn.style.backgroundColor = "#1e3a8a"; // Back to Blue
             cancelAnimationFrame(loopId);
-        }
-    });
+            total = 0;
+            inside = 0;
+            drawCircle();
 
-    resetBtn.addEventListener('click', () => {
-        running = false;
-        cancelAnimationFrame(loopId);
-        total = 0;
-        inside = 0;
+            toggleBtn.innerText = "Start Simulation";
+            toggleBtn.style.backgroundColor = "#1e3a8a";
+
+            document.getElementById('totalLbl').innerText = "0";
+            document.getElementById('insideLbl').innerText = "0";
+            document.getElementById('piEstimate').innerText = "0.00000";
+        });
+
         drawCircle();
-        
-        toggleBtn.innerText = "Start Simulation";
-        toggleBtn.style.backgroundColor = "#1e3a8a";
-        
-        document.getElementById('totalLbl').innerText = "0";
-        document.getElementById('insideLbl').innerText = "0";
-        document.getElementById('piEstimate').innerText = "0.00000";
-    });
-
-    drawCircle();
-</script>
+    </script>
 
 </body>
+
 </html>
